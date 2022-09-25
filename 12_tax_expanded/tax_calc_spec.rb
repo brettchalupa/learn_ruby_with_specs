@@ -5,7 +5,7 @@ require_relative "order"
 RSpec.describe "TaxCalc" do
   subject { TaxCalc.new(order, tax_rate) }
   let(:order) { Order.new(line_item_amount: 12.68) }
-  let(:tax_rate) { BigDecimal.new(0.07) }
+  let(:tax_rate) { BigDecimal(0.07) }
 
   describe "initializer checks" do
     it "requires both the order and tax_rate params be present" do

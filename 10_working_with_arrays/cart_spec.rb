@@ -4,7 +4,9 @@ RSpec.describe "Lesson 10 - Working with Arrays" do
   describe "Cart" do
     describe "#total" do
       it "adds the passed in item to the items array" do
-        cart = Cart.new
+        # NOTE: the `L10` represents a module this Cart definition needs to
+        # exist in so it doesn't conflict with other definitions of `Cart`.
+        cart = L10::Cart.new
 
         expect(cart.total).to eql(0.0)
 

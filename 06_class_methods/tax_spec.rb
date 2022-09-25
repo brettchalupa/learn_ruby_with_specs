@@ -11,7 +11,8 @@ RSpec.describe "Lesson 06 - Class Methods (+ float math)" do
 
       context "when the sales tax returns a decimal beyond two places" do
         it "rounds the value" do
-          expect(Tax.calculate(4.34)).to eql(0.32)
+          expect(Tax.calculate(4.34)).to eql(0.26)
+
           expect(Tax.calculate(108.62)).to eql(6.52)
         end
       end

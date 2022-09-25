@@ -3,30 +3,30 @@ require_relative "tax_calc"
 require_relative "order"
 
 RSpec.describe "TaxCalc" do
-  subject { described_class.new(order, tax_rate) }
+  subject { TaxCalc.new(order, tax_rate) }
   let(:order) { Order.new(line_item_amount: 12.68) }
   let(:tax_rate) { BigDecimal.new(0.07) }
 
   describe "initializer checks" do
     it "requires both the order and tax_rate params be present" do
-      expect { described_class.new }.to raise_error(ArgumentError)
-      expect { described_class.new(nil, tax_rate) }.to raise_error(ArgumentError)
-      expect { described_class.new(order, nil) }.to raise_error(ArgumentError)
-      expect { described_class.new(nil, nil) }.to raise_error(ArgumentError)
+      expect { TaxCalc.new }.to raise_error(ArgumentError)
+      expect { TaxCalc.new(nil, tax_rate) }.to raise_error(ArgumentError)
+      expect { TaxCalc.new(order, nil) }.to raise_error(ArgumentError)
+      expect { TaxCalc.new(nil, nil) }.to raise_error(ArgumentError)
     end
 
     it "ensures the order is an order" do
-      expect(described_class.new(double, tax_rate))
+      expect(TaxCalc.new(double, tax_rate))
         .to raise_error(ArgumentError, "order argument is not an instance of Order")
     end
 
     it "ensures the tax_rate is a Big Decimal" do
-      expect(described_class.new(order, "wow I protest taxes how dare you"))
+      expect(TaxCalc.new(order, "wow I protest taxes how dare you"))
         .to raise_error(ArgumentError, "tax_rate must be a Big Decimal")
     end
 
     it "converts float tax_rates into Big Decimals" do
-      rate = described_class.new(order, 12.56).instance_variable_get(:@tax_rate)
+      rate = TaxCalc.new(order, 12.56).instance_variable_get(:@tax_rate)
       expect(rate).to be_a(BigDecimal)
       expect(rate.to_s).to eql("12.56")
     end

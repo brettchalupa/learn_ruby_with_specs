@@ -9,7 +9,7 @@ RSpec.describe "Lesson 11 - Multiple Classes" do
 
         expect(cart.total).to eql(0.0)
 
-        apple = Item.new(name: "Apples", quantity: 2, unit_price: 2.40)
+        apples = Item.new(name: "Apples", quantity: 2, unit_price: 2.40)
         sweet_poatoes = Item.new(name: "Sweet Potatoes", quantity: 1, unit_price: 1.49)
 
         cart.add_item(apples)

@@ -1,11 +1,10 @@
-require "bigdecimal"
 require_relative "tax_calc"
 require_relative "order"
 
 RSpec.describe "TaxCalc" do
   subject { TaxCalc.new(order, tax_rate) }
   let(:order) { Order.new(line_item_amount: 12.68) }
-  let(:tax_rate) { BigDecimal("0.07") }
+  let(:tax_rate) { 0.07 }
 
   describe "initializer checks" do
     it "requires both the order and tax_rate params be present" do
@@ -20,15 +19,9 @@ RSpec.describe "TaxCalc" do
         .to raise_error(ArgumentError, "order argument is not an instance of Order")
     end
 
-    it "ensures the tax_rate is a Big Decimal" do
+    it "ensures the tax_rate is a Float" do
       expect { TaxCalc.new(order, "wow I protest taxes how dare you") }
-        .to raise_error(ArgumentError, "tax_rate must be a Big Decimal")
-    end
-
-    it "converts float tax_rates into Big Decimals" do
-      rate = TaxCalc.new(order, 12.56).instance_variable_get(:@tax_rate)
-      expect(rate).to be_a(BigDecimal)
-      expect(rate.to_s).to eql("12.56")
+        .to raise_error(ArgumentError, "tax_rate must be a Float")
     end
   end
 

@@ -16,12 +16,12 @@ RSpec.describe "TaxCalc" do
     end
 
     it "ensures the order is an order" do
-      expect(TaxCalc.new(double, tax_rate))
+      expect { TaxCalc.new(double("NotAnOrder"), tax_rate) }
         .to raise_error(ArgumentError, "order argument is not an instance of Order")
     end
 
     it "ensures the tax_rate is a Big Decimal" do
-      expect(TaxCalc.new(order, "wow I protest taxes how dare you"))
+      expect { TaxCalc.new(order, "wow I protest taxes how dare you") }
         .to raise_error(ArgumentError, "tax_rate must be a Big Decimal")
     end
 
@@ -34,13 +34,13 @@ RSpec.describe "TaxCalc" do
 
   describe "#tax_amount" do
     it "returns the calculated tax amount for the order based on the tax_rate rounded to two decimals" do
-      expect(subject.tax_amount).to eql(BigDecimal("0.89"))
+      expect(subject.tax_amount).to eql(0.89)
     end
   end
 
   describe "#total_with_tax" do
     it "returns the calculated total of the order with the tax" do
-      expect(subject.total_with_tax).to eql(BigDecimal("13.57"))
+      expect(subject.total_with_tax).to eql(13.57)
     end
   end
 end

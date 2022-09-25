@@ -219,7 +219,7 @@ When new releases are made, you can fetch the latest version by following these 
 
 1. In your course codebase, ensure you have an `upstream` remote pointing to the source repository: `git remote add upstream git@github.com:brettchalupa/learn_ruby_with_specs.git`
 2. Fetch the latest code from `upstream`: `git fetch upstream`
-3. Merge in the latest code into your repo: `git merge origin/upstream`
+3. Merge in the latest code into your repo: `git merge origin/upstream --allow-unrelated-histories`
 
 That'll pull in the latest changes, which will be new lessons and any adjustments to existing ones. You can then run the specs with `bin/rspec` and work on those new lessons.
 
